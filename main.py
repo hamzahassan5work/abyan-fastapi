@@ -11,7 +11,7 @@ Base = declarative_base()
 
 class Transaction(Base):
     __tablename__ = "transactions"
-    id = Column(Integer, primary_key=True, index=True)
+    id = Column(String, primary_key=True, index=True)
     data = Column(JSON)
 
 Base.metadata.create_all(bind=engine)
@@ -27,7 +27,7 @@ def get_db():
 
 # Endpoint to fetch stored JSON data
 @app.get("/fetch/")
-async def fetch_transactions(id: int, db: Session = Depends(get_db)):
+async def fetch_transactions(id: str, db: Session = Depends(get_db)):
     stored_data = db.query(Transaction).filter(Transaction.id == id).first().data
     if not stored_data:
         raise HTTPException(status_code=404, detail="Data not found")
@@ -35,7 +35,7 @@ async def fetch_transactions(id: int, db: Session = Depends(get_db)):
 
 # Combined create/update endpoint
 @app.post("/update/")
-async def update_transactions(id: int, data: dict, db: Session = Depends(get_db)):
+async def update_transactions(id: str, data: dict, db: Session = Depends(get_db)):
     existing_transaction = db.query(Transaction).filter(Transaction.id == id).first()
 
     if existing_transaction:
