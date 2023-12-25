@@ -2,6 +2,7 @@ from fastapi import FastAPI, HTTPException, Depends
 from sqlalchemy import create_engine, Column, String, Integer, JSON, MetaData
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, Session
+from typing import Union
 
 # Database setup
 DATABASE_URL = "postgresql://transaction_mocks_user:px1uZjvc2MHpNLUOj2tAv7cG3Lt1ntnf@dpg-cm4ra78cmk4c73cls50g-a.oregon-postgres.render.com/transaction_mocks"
