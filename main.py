@@ -4,7 +4,7 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, Session
 
 # Database setup
-DATABASE_URL = "postgresql://abyan_transaction_mocks_for_plan_user:uSmWTDQ8AMTUHckAcBYixMTRoiCXGfIo@dpg-cm4ndjmd3nmc73aktmeg-a.oregon-postgres.render.com/abyan_transaction_mocks_for_plan"
+DATABASE_URL = "postgresql://transaction_mocks_user:px1uZjvc2MHpNLUOj2tAv7cG3Lt1ntnf@dpg-cm4ra78cmk4c73cls50g-a.oregon-postgres.render.com/transaction_mocks"
 engine = create_engine(DATABASE_URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()
