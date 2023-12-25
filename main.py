@@ -26,7 +26,7 @@ def get_db():
         db.close()
 
 # Endpoint to fetch stored JSON data
-@app.get("/fetch/")
+@app.get("/fetch/{id}")
 async def fetch_transactions(id: str, db: Session = Depends(get_db)):
     stored_data = db.query(Transaction).filter(Transaction.id == id).first().data
     if not stored_data:
@@ -34,7 +34,7 @@ async def fetch_transactions(id: str, db: Session = Depends(get_db)):
     return stored_data
 
 # Combined create/update endpoint
-@app.post("/update/")
+@app.post("/update/{id}")
 async def update_transactions(id: str, data: dict, db: Session = Depends(get_db)):
     existing_transaction = db.query(Transaction).filter(Transaction.id == id).first()
 
