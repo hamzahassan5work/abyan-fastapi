@@ -27,7 +27,7 @@ def get_db():
 
 # Endpoint to fetch stored JSON data
 @app.get("/fetch/{id}")
-async def fetch_transactions(id: str, db: Session = Depends(get_db)):
+async def fetch_transactions(id: Union[str], db: Session = Depends(get_db)):
     stored_data = db.query(Transaction).filter(Transaction.id == id).first().data
     if not stored_data:
         raise HTTPException(status_code=404, detail="Data not found")
@@ -35,7 +35,7 @@ async def fetch_transactions(id: str, db: Session = Depends(get_db)):
 
 # Combined create/update endpoint
 @app.post("/update/{id}")
-async def update_transactions(id: str, data: dict, db: Session = Depends(get_db)):
+async def update_transactions(id: Union[str], data: dict, db: Session = Depends(get_db)):
     existing_transaction = db.query(Transaction).filter(Transaction.id == id).first()
 
     if existing_transaction:
