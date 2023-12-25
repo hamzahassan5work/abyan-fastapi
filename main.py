@@ -29,7 +29,7 @@ def get_db():
 # Endpoint to fetch stored JSON data
 @app.get("/fetch/{id}")
 async def fetch_transactions(id: Union[str], db: Session = Depends(get_db)):
-    stored_data = db.query(Transaction).filter(Transaction.id == id).first().data
+    stored_data = db.query(Transaction).filter(Transaction.id == id).first()
     if not stored_data:
         raise HTTPException(status_code=404, detail="Data not found")
     return stored_data
